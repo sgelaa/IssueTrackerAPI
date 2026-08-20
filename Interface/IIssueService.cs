@@ -2,7 +2,7 @@ using IssueTracker.Entities;
 
 namespace IssueTracker.Interface
 {
-    public interface IIssueRepository
+    public interface IIssueService
     {
         void AddIssue(Issue issue);
         Task<Issue?> GetIssueAsync(string id);
@@ -16,6 +16,5 @@ namespace IssueTracker.Interface
 
 
         Task<bool> SaveChangesAsync();
-
     }
 }
