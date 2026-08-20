@@ -1,12 +1,77 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using IssueTracker.Entities;
+using IssueTracker.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace IssueTracker.Data
 {
-    public class IssueRepository
+    public class IssueRepository(AppDbContext context) : IIssueRepository
     {
-        
+        public void AddIssue(Issue issue)
+        {
+            context.Add(issue);
+        }
+
+        public async Task<IList<Issue>?> GetAllIssuesAsync()
+        {
+            return await context.Issues.ToListAsync();
+        }
+
+        public async Task<Issue?> GetIssueAsync(string id)
+        {
+            return await context.Issues.FindAsync(id);
+        }
+
+        public async Task<IList<Issue>?> GetIssuesByPriorityAsync(string priority)
+        {
+            return await context.Issues
+                .Where(x => x.Priority == priority)
+                .ToListAsync();
+        }
+
+
+
+        public async Task<bool> RollbackStatus(string id)
+        {
+            var issue = await context.Issues.FindAsync(id);
+
+            if (issue != null)
+            {
+                if (issue.StatusId >= 1)
+                {
+                    issue.StatusId--;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public async Task<bool> UpdateIssueAsync(string id)
+        {
+            var issue = await context.Issues.FindAsync(id);
+
+            if (issue != null)
+            {
+                if (issue.StatusId <= 4)
+                {
+                    issue.StatusId++;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return await context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<IList<Issue>?> GetIssuesStatusAsync(int statusId)
+        {
+            return await context.Issues
+                .Where(x => x.StatusId == statusId)
+                .ToListAsync();
+        }
     }
 }
