@@ -6,8 +6,8 @@ namespace IssueTracker.Interface
     {
         void AddIssue(Issue issue);
         Task<Issue?> GetIssueAsync(string id);
-        Task<bool> UpdateIssueAsync(string id);
-        Task<bool> RollbackStatus(string id);
+        Task<bool> AdvanceStatusAsync(string id);
+        Task<bool> RollbackStatusAsync(string id);
 
 
         Task<IList<Issue>?> GetAllIssuesAsync();

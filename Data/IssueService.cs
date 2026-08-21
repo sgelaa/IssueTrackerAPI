@@ -30,9 +30,9 @@ namespace IssueTracker.Data
             return await repository.GetIssuesStatusAsync(statusId);
         }
 
-        public async Task<bool> RollbackStatus(string id)
+        public async Task<bool> RollbackStatusAsync(string id)
         {
-            return await repository.RollbackStatus(id);
+            return await repository.RollbackStatusAsync(id);
         }
 
         public async Task<bool> SaveChangesAsync()
@@ -40,9 +40,9 @@ namespace IssueTracker.Data
             return await repository.SaveChangesAsync();
         }
 
-        public async Task<bool> UpdateIssueAsync(string id)
+        public async Task<bool> AdvanceStatusAsync(string id)
         {
-            return await repository.UpdateIssueAsync(id);
+            return await repository.AdvanceStatusAsync(id);
         }
     }
 }

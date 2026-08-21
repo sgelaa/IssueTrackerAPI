@@ -15,6 +15,7 @@ namespace IssueTracker.Entities
         public required int StatusId { get; set; }
 
         public DateTime Created { get; set; }
+        public DateTime Modified { get; set; }
 
         // [JsonIgnore]
         // public Status Status { get; set; } = null!;

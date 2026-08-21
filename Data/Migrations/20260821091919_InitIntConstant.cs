@@ -26,32 +26,6 @@ namespace IssueTracker.Data.Migrations
                 {
                     table.PrimaryKey("PK_Issues", x => x.Id);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "Priorities",
-                columns: table => new
-                {
-                    PriorityId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Priorities", x => x.PriorityId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Statuses",
-                columns: table => new
-                {
-                    StatusId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Statuses", x => x.StatusId);
-                });
         }
 
         /// <inheritdoc />
@@ -59,12 +33,6 @@ namespace IssueTracker.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Issues");
-
-            migrationBuilder.DropTable(
-                name: "Priorities");
-
-            migrationBuilder.DropTable(
-                name: "Statuses");
         }
     }
 }

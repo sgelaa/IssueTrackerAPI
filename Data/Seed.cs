@@ -11,36 +11,36 @@ namespace IssueTracker.Data
             string[] priorities = ["LOW", "MEDIUM", "HIGH"];
 
             // foreach (var item in statuses)
-            if (!await context.Priorities.AnyAsync())
-            {
+            // if (!await context.Priorities.AnyAsync())
+            // {
 
-                for (int i = 0; i < statuses.Length; i++)
-                {
-                    var status = new Status
-                    {
-                        Name = statuses[i],
-                        StatusId = i,
-                    };
+            //     for (int i = 0; i < statuses.Length; i++)
+            //     {
+            //         var status = new Status
+            //         {
+            //             Name = statuses[i],
+            //             StatusId = i,
+            //         };
 
-                    // look into add range approach
-                    context.Statuses.Add(status);
-                }
-            }
+            //         // look into add range approach
+            //         context.Statuses.Add(status);
+            //     }
+            // }
 
-            if (!await context.Priorities.AnyAsync())
-            {
+            // if (!await context.Priorities.AnyAsync())
+            // {
 
-                for (int j = 0; j < priorities.Length; j++)
-                {
-                    var priority = new Priority
-                    {
-                        Name = priorities[j],
-                        PriorityId = j,
-                    };
+            //     for (int j = 0; j < priorities.Length; j++)
+            //     {
+            //         var priority = new Priority
+            //         {
+            //             Name = priorities[j],
+            //             PriorityId = j,
+            //         };
 
-                    context.Priorities.Add(priority);
-                }
-            }
+            //         context.Priorities.Add(priority);
+            //     }
+            // }
 
             // save all changes.
             await context.SaveChangesAsync();

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IssueTracker.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260821091459_InitIntConstant")]
+    [Migration("20260821091919_InitIntConstant")]
     partial class InitIntConstant
     {
         /// <inheritdoc />
@@ -45,36 +45,6 @@ namespace IssueTracker.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Issues");
-                });
-
-            modelBuilder.Entity("IssueTracker.Entities.Priority", b =>
-                {
-                    b.Property<int>("PriorityId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("PriorityId");
-
-                    b.ToTable("Priorities");
-                });
-
-            modelBuilder.Entity("IssueTracker.Entities.Status", b =>
-                {
-                    b.Property<int>("StatusId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("StatusId");
-
-                    b.ToTable("Statuses");
                 });
 #pragma warning restore 612, 618
         }

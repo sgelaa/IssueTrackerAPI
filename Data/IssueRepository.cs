@@ -1,4 +1,5 @@
 using IssueTracker.Entities;
+using IssueTracker.Helpers;
 using IssueTracker.Interface;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,16 +33,16 @@ namespace IssueTracker.Data
         }
 
 
-
-        public async Task<bool> RollbackStatus(string id)
+        public async Task<bool> RollbackStatusAsync(string id)
         {
             var issue = await context.Issues.FindAsync(id);
 
             if (issue != null)
             {
-                if (issue.StatusId >= 1)
+                if (issue.StatusId >= Statuses.NEW)
                 {
                     issue.StatusId--;
+                    issue.Modified = DateTime.UtcNow;
                     return true;
                 }
             }
@@ -49,15 +50,16 @@ namespace IssueTracker.Data
             return false;
         }
 
-        public async Task<bool> UpdateIssueAsync(string id)
+        public async Task<bool> AdvanceStatusAsync(string id)
         {
             var issue = await context.Issues.FindAsync(id);
 
             if (issue != null)
             {
-                if (issue.StatusId <= 4)
+                if (issue.StatusId <= Statuses.CLOSED)
                 {
                     issue.StatusId++;
+                    issue.Modified = DateTime.UtcNow;
                     return true;
                 }
             }
