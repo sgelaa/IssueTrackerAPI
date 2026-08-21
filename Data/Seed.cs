@@ -1,4 +1,5 @@
 using IssueTracker.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace IssueTracker.Data
 {
@@ -10,27 +11,35 @@ namespace IssueTracker.Data
             string[] priorities = ["LOW", "MEDIUM", "HIGH"];
 
             // foreach (var item in statuses)
-            for (int i = 0; i < statuses.Length; i++)
+            if (!await context.Priorities.AnyAsync())
             {
-                var status = new Status
-                {
-                    Name = statuses[i],
-                    StatusId = i,
-                };
 
-                context.Statuses.Add(status);
+                for (int i = 0; i < statuses.Length; i++)
+                {
+                    var status = new Status
+                    {
+                        Name = statuses[i],
+                        StatusId = i,
+                    };
+
+                    // look into add range approach
+                    context.Statuses.Add(status);
+                }
             }
 
-            for (int j = 0; j < priorities.Length; j++)
+            if (!await context.Priorities.AnyAsync())
             {
 
-                var priority = new Priority
+                for (int j = 0; j < priorities.Length; j++)
                 {
-                    Name = priorities[j],
-                    PriorityId = j,
-                };
+                    var priority = new Priority
+                    {
+                        Name = priorities[j],
+                        PriorityId = j,
+                    };
 
-                context.Priorities.Add(priority);
+                    context.Priorities.Add(priority);
+                }
             }
 
             // save all changes.

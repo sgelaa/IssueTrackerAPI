@@ -11,7 +11,7 @@ namespace IssueTracker.Interface
 
 
         Task<IList<Issue>?> GetAllIssuesAsync();
-        Task<IList<Issue>?> GetIssuesByPriorityAsync(string priority);
+        Task<IList<Issue>?> GetIssuesByPriorityAsync(int priorityId);
         Task<IList<Issue>?> GetIssuesStatusAsync(int statusId);
 
 

@@ -13,7 +13,10 @@ namespace IssueTracker.Data
 
         public async Task<IList<Issue>?> GetAllIssuesAsync()
         {
-            return await context.Issues.ToListAsync();
+            return await context.Issues
+                // .Include(x => x.Status)
+                // .Include(x => x.Priority)
+                .ToListAsync();
         }
 
         public async Task<Issue?> GetIssueAsync(string id)
@@ -21,10 +24,10 @@ namespace IssueTracker.Data
             return await context.Issues.FindAsync(id);
         }
 
-        public async Task<IList<Issue>?> GetIssuesByPriorityAsync(string priority)
+        public async Task<IList<Issue>?> GetIssuesByPriorityAsync(int priorityId)
         {
             return await context.Issues
-                .Where(x => x.Priority == priority)
+                .Where(x => x.PriorityId == priorityId)
                 .ToListAsync();
         }
 

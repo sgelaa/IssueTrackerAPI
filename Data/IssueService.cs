@@ -20,9 +20,9 @@ namespace IssueTracker.Data
             return await repository.GetIssueAsync(id);
         }
 
-        public async Task<IList<Issue>?> GetIssuesByPriorityAsync(string priority)
+        public async Task<IList<Issue>?> GetIssuesByPriorityAsync(int priorityId)
         {
-            return await repository.GetIssuesByPriorityAsync(priority);
+            return await repository.GetIssuesByPriorityAsync(priorityId);
         }
 
         public async Task<IList<Issue>?> GetIssuesStatusAsync(int statusId)
