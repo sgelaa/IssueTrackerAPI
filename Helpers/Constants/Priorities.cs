@@ -1,4 +1,4 @@
-namespace IssueTracker.Helpers
+namespace IssueTracker.Helpers.Constants
 {
     public class Priorities
     {

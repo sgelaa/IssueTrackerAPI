@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using IssueTracker.Data;
 using IssueTracker.Interface;
 using Microsoft.EntityFrameworkCore;
@@ -6,7 +7,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+        .AddJsonOptions(options =>
+        {
+            options.JsonSerializerOptions.Converters.Add(
+                new JsonStringEnumConverter()
+            );
+        });
+            
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));

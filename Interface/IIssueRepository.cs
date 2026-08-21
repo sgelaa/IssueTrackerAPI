@@ -1,4 +1,5 @@
 using IssueTracker.Entities;
+using IssueTracker.Helpers;
 
 namespace IssueTracker.Interface
 {
@@ -10,7 +11,7 @@ namespace IssueTracker.Interface
         Task<bool> RollbackStatusAsync(string id);
 
 
-        Task<IList<Issue>?> GetAllIssuesAsync();
+        Task<PaginatedResult<Issue>?> GetAllIssuesAsync(int pageNumber, int pageSize);
         Task<IList<Issue>?> GetIssuesByPriorityAsync(int priorityId);
         Task<IList<Issue>?> GetIssuesStatusAsync(int statusId);
 

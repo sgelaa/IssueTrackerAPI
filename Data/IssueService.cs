@@ -1,4 +1,5 @@
 using IssueTracker.Entities;
+using IssueTracker.Helpers;
 using IssueTracker.Interface;
 
 namespace IssueTracker.Data
@@ -10,9 +11,9 @@ namespace IssueTracker.Data
             repository.AddIssue(issue);
         }
 
-        public async Task<IList<Issue>?> GetAllIssuesAsync()
+        public async Task<PaginatedResult<Issue>?> GetAllIssuesAsync(int pageNumber, int pageSize)
         {
-            return await repository.GetAllIssuesAsync();
+            return await repository.GetAllIssuesAsync(pageNumber, pageSize);
         }
 
         public async Task<Issue?> GetIssueAsync(string id)

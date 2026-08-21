@@ -1,6 +1,7 @@
 using IssueTracker.Entities;
 using IssueTracker.Entities.DTO;
 using IssueTracker.Helpers;
+using IssueTracker.Helpers.Constants;
 using IssueTracker.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,9 +11,9 @@ namespace IssueTracker.Controllers
     {
 
         [HttpGet("all")]
-        public async Task<ActionResult> GetAllIssues()
+        public async Task<ActionResult<PaginatedResult<Issue>>> GetAllIssues([FromQuery]int pageNumber, int pageSize)
         {
-            return Ok(await service.GetAllIssuesAsync());
+            return Ok(await service.GetAllIssuesAsync(pageNumber,pageSize));
         }
 
         [HttpPost("add")]

@@ -1,5 +1,6 @@
 using IssueTracker.Entities;
 using IssueTracker.Helpers;
+using IssueTracker.Helpers.Constants;
 using IssueTracker.Interface;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,12 +13,13 @@ namespace IssueTracker.Data
             context.Add(issue);
         }
 
-        public async Task<IList<Issue>?> GetAllIssuesAsync()
+        public async Task<PaginatedResult<Issue>?> GetAllIssuesAsync(int pageNumber, int pageSize)
         {
-            return await context.Issues
-                // .Include(x => x.Status)
-                // .Include(x => x.Priority)
-                .ToListAsync();
+            var query = context.Issues
+                .OrderByDescending(z => z.Created)
+                .AsQueryable();
+
+            return await PaginationHelper.CreateAsync(query, pageNumber, pageSize);
         }
 
         public async Task<Issue?> GetIssueAsync(string id)
