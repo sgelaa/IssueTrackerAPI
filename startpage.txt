@@ -1,0 +1,8 @@
+# 1. Rename your current local branch to "main" (GitHub's default)
+git branch -m main
+
+# 2. Link your local repository to your remote GitHub repository
+git remote add origin <PASTE_YOUR_GITHUB_REPO_URL_HERE>
+
+# 3. Push your commits and establish the upstream tracking link
+git push -u origin main
