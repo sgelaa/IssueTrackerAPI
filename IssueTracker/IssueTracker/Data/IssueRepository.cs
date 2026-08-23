@@ -1,6 +1,6 @@
 using IssueTracker.Entities;
 using IssueTracker.Helpers;
-using IssueTracker.Helpers.Constants;
+using IssueTracker.Helpers.Enum;
 using IssueTracker.Interface;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,7 +41,7 @@ namespace IssueTracker.Data
 
             if (issue != null)
             {
-                if (issue.StatusId >= Statuses.NEW)
+                if (issue.StatusId >= (int)Statuses.New)
                 {
                     issue.StatusId--;
                     issue.Modified = DateTime.UtcNow;
@@ -58,7 +58,7 @@ namespace IssueTracker.Data
 
             if (issue != null)
             {
-                if (issue.StatusId <= Statuses.CLOSED)
+                if (issue.StatusId < (int)Statuses.Closed)
                 {
                     issue.StatusId++;
                     issue.Modified = DateTime.UtcNow;
