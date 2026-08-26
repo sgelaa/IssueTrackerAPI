@@ -13,7 +13,7 @@ namespace IssueTracker.Data
             context.Add(issue);
         }
 
-        public async Task<PaginatedResult<Issue>?> GetAllIssuesAsync(int pageNumber, int pageSize)
+        public async Task<PaginatedResult<Issue>> GetAllIssuesAsync(int pageNumber, int pageSize)
         {
             var query = context.Issues
                 .OrderByDescending(z => z.Created)
@@ -27,7 +27,7 @@ namespace IssueTracker.Data
             return await context.Issues.FindAsync(id);
         }
 
-        public async Task<IList<Issue>?> GetIssuesByPriorityAsync(int priorityId)
+        public async Task<IReadOnlyList<Issue>?> GetIssuesByPriorityAsync(int priorityId)
         {
             return await context.Issues
                 .Where(x => x.PriorityId == priorityId)
@@ -74,11 +74,21 @@ namespace IssueTracker.Data
             return await context.SaveChangesAsync() > 0;
         }
 
-        public async Task<IList<Issue>?> GetIssuesStatusAsync(int statusId)
+        public async Task<IReadOnlyList<Issue>?> GetIssuesStatusAsync(int statusId)
         {
             return await context.Issues
                 .Where(x => x.StatusId == statusId)
                 .ToListAsync();
+        }
+
+        public Task<Issue> UpdateIssue(Issue newIssue)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteIssue(string id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

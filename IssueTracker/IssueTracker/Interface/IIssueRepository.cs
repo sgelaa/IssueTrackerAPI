@@ -10,10 +10,12 @@ namespace IssueTracker.Interface
         Task<bool> AdvanceStatusAsync(string id);
         Task<bool> RollbackStatusAsync(string id);
 
+        Task<Issue> UpdateIssue(Issue newIssue);
+        Task<bool> DeleteIssue(string id);
 
-        Task<PaginatedResult<Issue>?> GetAllIssuesAsync(int pageNumber, int pageSize);
-        Task<IList<Issue>?> GetIssuesByPriorityAsync(int priorityId);
-        Task<IList<Issue>?> GetIssuesStatusAsync(int statusId);
+        Task<PaginatedResult<Issue>> GetAllIssuesAsync(int pageNumber, int pageSize);
+        Task<IReadOnlyList<Issue>?> GetIssuesByPriorityAsync(int priorityId);
+        Task<IReadOnlyList<Issue>?> GetIssuesStatusAsync(int statusId);
 
 
         Task<bool> SaveChangesAsync();
