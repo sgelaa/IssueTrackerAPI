@@ -4,46 +4,36 @@ using IssueTracker.Interface;
 
 namespace IssueTracker.Data
 {
-    public class IssueService(IIssueRepository repository) : IIssueService
+    public class IssueService(IUnitOfWork uow) : IIssueService
     {
         public void AddIssue(Issue issue)
         {
-            repository.AddIssue(issue);
+            uow.Issues.AddIssue(issue);
         }
 
         public async Task<PaginatedResult<Issue>?> GetAllIssuesAsync(int pageNumber, int pageSize)
         {
-            return await repository.GetAllIssuesAsync(pageNumber, pageSize);
+            return await uow.Issues.GetAllIssuesAsync(pageNumber, pageSize);
         }
 
         public async Task<Issue?> GetIssueAsync(string id)
         {
-            return await repository.GetIssueAsync(id);
+            return await uow.Issues.GetIssueAsync(id);
         }
 
-        public async Task<IList<Issue>?> GetIssuesByPriorityAsync(int priorityId)
+        public async Task<IReadOnlyList<Issue>?> GetIssuesByPriorityAsync(int priorityId)
         {
-            return await repository.GetIssuesByPriorityAsync(priorityId);
+            return await uow.Issues.GetIssuesByPriorityAsync(priorityId);
         }
 
-        public async Task<IList<Issue>?> GetIssuesStatusAsync(int statusId)
+        public async Task<IReadOnlyList<Issue>?> GetIssuesStatusAsync(int statusId)
         {
-            return await repository.GetIssuesStatusAsync(statusId);
-        }
-
-        public async Task<bool> RollbackStatusAsync(string id)
-        {
-            return await repository.RollbackStatusAsync(id);
+            return await uow.Issues.GetIssuesStatusAsync(statusId);
         }
 
         public async Task<bool> SaveChangesAsync()
         {
-            return await repository.SaveChangesAsync();
-        }
-
-        public async Task<bool> AdvanceStatusAsync(string id)
-        {
-            return await repository.AdvanceStatusAsync(id);
+            return await uow.SaveChangesAsync();
         }
     }
 }

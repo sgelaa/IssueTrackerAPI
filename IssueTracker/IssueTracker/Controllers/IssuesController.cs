@@ -11,9 +11,9 @@ namespace IssueTracker.Controllers
     {
 
         [HttpGet("all")]
-        public async Task<ActionResult<PaginatedResult<Issue>>> GetAllIssues([FromQuery]int pageNumber, int pageSize)
+        public async Task<ActionResult<PaginatedResult<Issue>>> GetAllIssues([FromQuery] int pageNumber, int pageSize)
         {
-            return Ok(await service.GetAllIssuesAsync(pageNumber,pageSize));
+            return Ok(await service.GetAllIssuesAsync(pageNumber, pageSize));
         }
 
         [HttpPost("add")]
@@ -40,35 +40,35 @@ namespace IssueTracker.Controllers
         }
 
 
-        [HttpPut("advance/{id}")]
-        public async Task<ActionResult> AdvanceStatus(string id)
-        {
-            var issue = await service.GetIssueAsync(id);
-            var success = false;
-            if (issue != null)
-            {
-                if(issue.StatusId == (int)Statuses.Closed) return BadRequest("selected issue already closed");
-                success = await service.AdvanceStatusAsync(id);
-                await service.SaveChangesAsync();
-            }
+        // [HttpPut("advance/{id}")]
+        // public async Task<ActionResult> AdvanceStatus(string id)
+        // {
+        //     var issue = await service.GetIssueAsync(id);
+        //     var success = false;
+        //     if (issue != null)
+        //     {
+        //         if(issue.StatusId == (int)Statuses.Closed) return BadRequest("selected issue already closed");
+        //         success = await service.AdvanceStatusAsync(id);
+        //         await service.SaveChangesAsync();
+        //     }
 
-            return Ok(success);
-        }
+        //     return Ok(success);
+        // }
 
-        [HttpPut("rollback/{id}")]
-        public async Task<ActionResult> RollbackStatus(string id)
-        {
-            var issue = await service.GetIssueAsync(id);
-            var success = false;
-            if (issue != null)
-            {
-                if(issue.StatusId == (int)Statuses.Open) return BadRequest("selected issue already in open state");
-                success = await service.RollbackStatusAsync(id);
-                await service.SaveChangesAsync();
-            }
+        // [HttpPut("rollback/{id}")]
+        // public async Task<ActionResult> RollbackStatus(string id)
+        // {
+        //     var issue = await service.GetIssueAsync(id);
+        //     var success = false;
+        //     if (issue != null)
+        //     {
+        //         if(issue.StatusId == (int)Statuses.Open) return BadRequest("selected issue already in open state");
+        //         success = await service.RollbackStatusAsync(id);
+        //         await service.SaveChangesAsync();
+        //     }
 
-            return Ok(success);
-        }
+        //     return Ok(success);
+        // }
 
         [HttpGet("all/status/{status}")]
         public async Task<ActionResult> GetIssuesByStatus(int status)
