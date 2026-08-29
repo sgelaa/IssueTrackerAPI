@@ -2,9 +2,9 @@ using IssueTracker.Interface;
 
 namespace IssueTracker.Data
 {
-    public class UnitOfWork(AppDbContext context) : IUnitOfWork
+    public class UnitOfWork(AppDbContext context, IIssueRepository issues) : IUnitOfWork
     {
-        public IIssueRepository Issues { get; } = new IssueRepository(context);
+        public IIssueRepository Issues { get; } = issues;
 
         public bool HasChanges()
         {

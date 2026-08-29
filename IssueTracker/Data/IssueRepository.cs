@@ -1,6 +1,5 @@
 using IssueTracker.Entities;
 using IssueTracker.Helpers;
-using IssueTracker.Helpers.Enum;
 using IssueTracker.Interface;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,7 +39,10 @@ namespace IssueTracker.Data
 
         public async Task UpdateIssueAsync(Issue newIssue) => context.Issues.Update(newIssue);
 
-        public async Task DeleteIssueAsync(string id) => context.Issues.Remove(new Issue { Id = id });
-
+        public async Task DeleteIssueAsync(string id)
+        {
+            var stub = new Issue { Id = id };
+            context.Issues.Remove(stub);
+        }
     }
 }
