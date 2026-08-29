@@ -6,14 +6,14 @@ namespace IssueTracker.Entities
     public class Issue
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
-        public required string  Title { get; set; }
-        public required string Description { get; set; }
+        public  string?  Title { get; set; }
+        public string? Description { get; set; }
 
         // LOW - MEDIUM - HIGH
-        public required int PriorityId { get; set; }
+        public  int PriorityId { get; set; } = 0;
 
         // NEW - OPEN - IN-PROGRESS - DONE - CLOSED
-        public required int StatusId { get; set; }
+        public  int StatusId { get; set; } = 0;
 
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
