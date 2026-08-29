@@ -11,7 +11,7 @@ namespace IssueTracker.Controllers
     {
 
         [HttpGet("all")]
-        public async Task<ActionResult<PaginatedResult<Issue>>> GetAllIssues([FromQuery] int pageNumber, int pageSize)
+        public async Task<ActionResult<PaginatedResult<Issue>>> GetAllIssues([FromQuery] int pageNumber = 1, int pageSize = 10)
         {
             return Ok(await service.GetAllIssuesAsync(pageNumber, pageSize));
         }
